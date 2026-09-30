@@ -28,6 +28,20 @@ local_path_override(
     path = "../../../docs",
 )
 
+git_override(
+    module_name = "envoy_toolshed",
+    commit = "33a045f583f0a23675583537d1bd78c75883018d",
+    remote = "https://github.com/envoyproxy/toolshed",
+    strip_prefix = "bazel",
+)
+
+git_override(
+    module_name = "envoy_toolshed_jq",
+    commit = "33a045f583f0a23675583537d1bd78c75883018d",
+    remote = "https://github.com/envoyproxy/toolshed",
+    strip_prefix = "jq",
+)
+
 python = use_extension("@rules_python//python/extensions:python.bzl", "python")
 python.toolchain(
     is_default = True,
