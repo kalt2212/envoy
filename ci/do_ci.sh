@@ -644,10 +644,12 @@ case $CI_TARGET in
 
     deps)
         echo "dependency metadata ordering..."
-        bazel test "${BAZEL_BUILD_OPTIONS[@]}" \
+        bazel test "${BAZEL_GLOBAL_OPTIONS[@]}" \
+              --config=ci \
               //tools/dependency:deps_order_test
         echo "dependency validate_reachability_test..."
-        bazel test "${BAZEL_BUILD_OPTIONS[@]}" \
+        bazel test "${BAZEL_GLOBAL_OPTIONS[@]}" \
+              --config=ci \
               //tools/dependency:validate_reachability_test
         echo "dependency graph structure..."
         "${ENVOY_SRCDIR}/tools/dependency/validate_graph_structure.sh"

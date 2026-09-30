@@ -71,6 +71,7 @@ workspace_target() {
         "$ENVOY_DOCS_PATH") echo "//:${target_name}" ;;
         api) echo "//bazel:${target_name}" ;;
         mobile) echo "//bazel:${target_name}" ;;
+        bazel/tests/codeql) echo "//:${target_name}" ;;
         bazel/tests/external) echo "//:${target_name}" ;;
         *)
             echo "FAIL: Unknown workspace: ${module_dir}" >&2
@@ -87,7 +88,7 @@ workspace_bazel_run() {
 
     target="$(workspace_target "$module_dir" "$target_name")" || return 1
     # shellcheck disable=SC2046
-    bazel run "${BAZEL_BUILD_OPTIONS[@]}" "$target" "$@"
+    bazel run "${BAZEL_GLOBAL_OPTIONS[@]}" --config=ci "$target" "$@"
 }
 
 lockfiles_check() {
